@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="756da7bd-4856-47e9-878c-4e38795c4847" name="Scott" url="http://seattledc.com">
+        <fileTransfer host="seattledc.com" port="55000" rootFolder="/home/seattledc" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="55000" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
