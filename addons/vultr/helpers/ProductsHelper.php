@@ -13,7 +13,7 @@ class ProductsHelper {
     
 
     public static function configurableOptions($productID) {
-        logModuleCall('Vultr Addon', 'configurableOptions', 'start', '1', '2', '3');
+//        logModuleCall('Vultr Addon', 'configurableOptions', 'start', '1', '2', '3');
 
         $vultrAPI = ApiHelper::getAPI();
         if ($vultrAPI->checkConnection()) {
@@ -53,41 +53,46 @@ class ProductsHelper {
         self::insertSubOptionsPricing($autoBackupSubOptionID);
 
         
-        $snapshotID = DB::table('tblproductconfigoptions')->insertGetId(array('gid' => $productConfigGroupID, 'optionname' => 'snapshots|Snapshots limit', 'optiontype' => '4', 'qtyminimum' => '0', 'qtymaximum' => '10'));
-        $snapshotSubOptionID = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $snapshotID, 'optionname' => '1'));
-        //Add pricing for snapshots configoption
-        self::insertSubOptionsPricing($snapshotSubOptionID);
+//        $snapshotID = DB::table('tblproductconfigoptions')->insertGetId(array('gid' => $productConfigGroupID, 'optionname' => 'snapshots|Snapshots limit', 'optiontype' => '4', 'qtyminimum' => '0', 'qtymaximum' => '10'));
+//        $snapshotSubOptionID = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $snapshotID, 'optionname' => '1'));
+//        //Add pricing for snapshots configoption
+//        self::insertSubOptionsPricing($snapshotSubOptionID);
 
         $osID = DB::table('tblproductconfigoptions')->insertGetId(array('gid' => $productConfigGroupID, 'optionname' => 'os_type|OS Type', 'optiontype' => '1'));
 
         foreach ($vultrAPI->os_list() as $value) {
-            if($value['name'] == "Backup")
+//            if($value['name'] == "Backup")
+//                continue;
+//            if ($value['name'] == "Custom")
+//                $value['name'] = "ISO";
+            if($value['name'] != "Snapshot")
                 continue;
-            if ($value['name'] == "Custom")
-                $value['name'] = "ISO";
             $osSubOptionID = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $osID, 'optionname' => $value['OSID'] . '|' . $value['name']));
-            
+
             //Add pricing for operating system configoption
             self::insertSubOptionsPricing($osSubOptionID);
 
         }
-           
-        
-        $appID = DB::table('tblproductconfigoptions')->insertGetId(array('gid' => $productConfigGroupID, 'optionname' => 'application|Application', 'optiontype' => '1'));
-        $noneOptionId = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $appID, 'optionname' => '0|None'));
-        self::insertSubOptionsPricing($noneOptionId);
-        foreach ($vultrAPI->app_list() as $value) {
-            $appSubOptionID = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $appID, 'optionname' => $value['APPID'] . '|' . $value['deploy_name']));
+
+
+        $locationID = DB::table('tblproductconfigoptions')->insertGetId(array('gid' => $productConfigGroupID, 'optionname' => 'location|Location', 'optiontype' => '1'));
+        foreach ($vultrAPI->regions_list() as $value) {
+            $locationSubOptionID = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $locationID, 'optionname' => $value['DCID'] . '|' . $value['name'].'('.$value['country'].')'));
              //Add pricing for application configoption
-             self::insertSubOptionsPricing($appSubOptionID);
-      
+             self::insertSubOptionsPricing($locationSubOptionID);
+
         }
+
+        $productSnapshots = DB::table('tblproducts')->where('id', $productID)->get();
+//        logModuleCall('Vultr Addon', 'ProductsHelper', 'prepareConfigurableOptions', '1', $productSnapshots[0]->configoption3);
+        $productSnapshots = json_decode($productSnapshots[0]->configoption3);
 
         $snapshotSelectID = DB::table('tblproductconfigoptions')->insertGetId(array('gid' => $productConfigGroupID, 'optionname' => 'snapshot_select|Snapshot', 'optiontype' => '1'));
         $snapshotOptionId = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $snapshotSelectID, 'optionname' => '0|None'));
         self::insertSubOptionsPricing($snapshotOptionId);
-        foreach ($vultrAPI->snapshot_list() as $value) {
-            $snapshotId = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $snapshotSelectID, 'optionname' => $value['SNAPSHOTID'] . '|' . $value['description']));
+        $snapshots = $vultrAPI->snapshot_list();
+        foreach ($productSnapshots as $value) {
+            $snapshotId = DB::table('tblproductconfigoptionssub')->insertGetId(array('configid' => $snapshotSelectID, 'optionname' => $value . '|' . $snapshots[$value]['description']));
             self::insertSubOptionsPricing($snapshotId);
         }
 

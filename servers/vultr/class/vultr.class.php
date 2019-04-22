@@ -176,6 +176,7 @@ class Vultr
 
     public function createAccount()
     {
+        logModuleCall('Vultr Provision', 'createAccount', 'createAccount', '1', $this->params);
         return 'success'; //LangHelper::T('core.action.action_not_supported');
     }
 
@@ -186,6 +187,7 @@ class Vultr
 
     public function unsuspendAccount()
     {
+        logModuleCall('Vultr Provision', 'unsuspendAccount', 'unsuspendAccount', '1', $this->params);
         return $this->start();
     }
 
@@ -199,6 +201,7 @@ class Vultr
 
     public function changePackage()
     {
+        logModuleCall('Vultr Provision', 'changePackage', 'changePackage', '1', $this->params);
         VultrHelper::moveProductConfigOptionsOnUpgrade($this->params);
         $message = '';
         $vultrAPI = new \VultrAPI($this->params['configoption1']);
@@ -231,6 +234,7 @@ class Vultr
 
     public function verifyAdminServiceSave()
     {
+        logModuleCall('Vultr Provision', 'verifyAdminServiceSave', 'verifyAdminServiceSave', '1', $this->params);
         $vultrAPI = new \VultrAPI($this->params['configoption1']);
         if ($vultrAPI->checkConnection()) {
             if (!empty($this->params['customfields']['subid'])) {

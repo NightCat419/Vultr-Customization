@@ -38,6 +38,11 @@ class ProductsCreator extends main\mgLibs\process\AbstractController
         $plans = $apiConnection->plans_list();
         $vars['apiProducts'] = $plans;
 
+        $snapModel = new \MGModule\vultr\models\snapshots\Repository();
+        $snapshots = $snapModel->getSnapshotsList();
+//        logModuleCall('Vultr Addon', 'ProductsCreator', 'indexHTML', '1', $snapshots);
+        $vars['snapshots'] = $snapshots;
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' AND isset($input['createSingle'])) {
               $this->saveProduct($input, $vars);
               $vars['success'] = main\mgLibs\Lang::T('messages', 'single_product_created');
@@ -74,9 +79,10 @@ class ProductsCreator extends main\mgLibs\process\AbstractController
             'paytype'    => $input['paytype'],
             'servertype' => 'vultr',
             'configoption1' => $token[0]->value,
-            'configoption2' => $input['configoption2']
+            'configoption2' => $input['configoption2'],
+            'configoption3'  => json_encode($input['snapshots'])
         );
-    
+//        logModuleCall('Vultr Addon', 'ProductsCreator', 'saveProduct', '1', $productData['configoption3']);
         $repository = new main\models\customWHMCS\product\Repository();
        
         $insertedProductId = $repository->saveSingleProduct($productData);

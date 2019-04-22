@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1">
                     <label for="vultrLabel">{$_LANG.main.create.server_label}</label>
-                    <input value="{if isset($postData['vultrLabel'])}{$postData['vultrLabel']}{/if}" class="form-control" type="text" id="vultrLabel" name="vultrLabel" maxlength="250" placeholder="{$_LANG.main.create.server_label_placeholder}">
+                    <input value="{if isset($postData['vultrLabel'])}{$postData['vultrLabel']}{elseif isset($module['domain'])}{$module['domain']}{/if}" class="form-control" type="text" id="vultrLabel" name="vultrLabel" maxlength="250" placeholder="{$_LANG.main.create.server_label_placeholder}">
                 </div>
             </div>
             <!--Select Label END-->
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1">
                     <label for="vultrHostname">{$_LANG.main.create.server_hostname}</label>
-                    <input value="{if isset($postData['vultrHostname'])}{$postData['vultrHostname']}{/if}" class="form-control" type="text" id="vultrHostname" name="vultrHostname" maxlength="250" placeholder="{$_LANG.main.create.server_hostname_placeholder}">
+                    <input value="{if isset($postData['vultrHostname'])}{$postData['vultrHostname']}{elseif isset($module['domain'])}{$module['domain']}{/if}" class="form-control" type="text" id="vultrHostname" name="vultrHostname" maxlength="250" placeholder="{$_LANG.main.create.server_hostname_placeholder}">
                 </div>
             </div>
             <!--Select Hostname END-->
@@ -30,10 +30,10 @@
             <div class="row">
                 <div class="col-sm-5 col-sm-offset-1">
                     <label for="vultrRegionDCID">{$_LANG.main.create.location}</label>
-                    <select class="form-control" id="vultrRegionDCID" name="vultrRegionDCID">
-                        {foreach from=$regions key=k item=v}
-                            <option value="{$v['DCID']}" {if isset($postData['vultrRegionDCID']) && $postData['vultrRegionDCID']==$v['DCID']}selected{/if}>{$v['name']} ({$v['country']})</option>
-                        {/foreach}
+                    <select disabled class="form-control" id="vultrRegionDCID" name="vultrRegionDCID">
+                        {*{foreach from=$regions key=k item=v}*}
+                            <option value="{$module['configoptions']['location']}" selected>{$regions[$module['configoptions']['location']]['name']} ({$regions[$module['configoptions']['location']]['country']})</option>
+                        {*{/foreach}*}
                     </select>
                 </div>
                 <!--Select Region END-->
@@ -52,10 +52,10 @@
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
                         <label for="vultrSNAPSHOTID">{$_LANG.main.create.snapshot}</label>
-                        <select class="form-control" id="vultrSNAPSHOTID" name="vultrSNAPSHOTID">          
-                            {foreach from=$snapshots key=k item=v}
-                                <option value="{$v['SNAPSHOTID']}" {if isset($postData['vultrSNAPSHOTID']) && $postData['vultrSNAPSHOTID']==$v['SNAPSHOTID']}selected{/if}>{$v['description']}</option>
-                            {/foreach}
+                        <select disabled class="form-control" id="vultrSNAPSHOTID" name="vultrSNAPSHOTID">
+                            {*{foreach from=$snapshots key=k item=v}*}
+                                <option value="{$module['configoptions']['snapshot_select']}" selected>{$snapshots[$module['configoptions']['snapshot_select']]['description']}</option>
+                            {*{/foreach}*}
                         </select>
                     </div>
                 </div>

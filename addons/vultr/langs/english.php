@@ -57,6 +57,7 @@ $_LANG['addonAA']['productsCreator']['pricingSetupFee'] = 'Pricing Setup Fee';
 $_LANG['addonAA']['productsCreator']['pricingPrice'] = 'Pricing Price';
 $_LANG['addonAA']['productsCreator']['pricingEnable'] = 'Pricing Enable';
 $_LANG['addonAA']['productsCreator']['paymentType'] = 'Payment Type';
+$_LANG['addonAA']['productsCreator']['snapshots'] = 'Snapshots';
 
 $_LANG['addonAA']['productsCreator']['free'] = 'Free';
 $_LANG['addonAA']['productsCreator']['Onetime Payment'] = 'One Time';

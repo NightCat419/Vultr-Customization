@@ -13,7 +13,8 @@ class MainController extends VultrController {
         if ($this->params['status'] == 'Pending') {
             return;
         }
- 
+//        logModuleCall('Vultr Provision', 'main.controller', 'indexAction', '1', $this->params);
+
         if (empty($this->params['customfields']['subid'])) {
             $this->redirect('clientarea.php?action=productdetails&id=' . $this->serviceID . '&cloudController=Main&cloudAction=create');
         } else {
@@ -139,12 +140,13 @@ class MainController extends VultrController {
         if ($this->getVultrAPI()) {
         
             if (isset($_POST['cloudCreateAction'])) {
-        
+
                 $error = false;
                 $vmParams = array(
-                    'DCID'      => filter_input(INPUT_POST, 'vultrRegionDCID'),
+                    'DCID'      => $this->params['configoptions']['location'],
                     'VPSPLANID' => $this->params['configoption2'],
-                    'OSID'      => $this->params['configoptions']['os_type']
+                    'OSID'      => $this->params['configoptions']['os_type'],
+                    'SNAPSHOTID'=> $this->params['configoptions']['snapshot_select']
                 );
                 if ($vmParams['OSID'] == '159') {
                     switch ($_POST['vultrISOType']) {
@@ -218,6 +220,7 @@ class MainController extends VultrController {
                 }
                 if (!$error) {
                     if ($vmParams['OSID'] == '164') {
+                        logModuleCall('Vultr Provision', 'main.controller', 'SNAPSHOTID', '1', filter_input(INPUT_POST, 'vultrSNAPSHOTID'));
                         if ($SCRIPTID = filter_input(INPUT_POST, 'vultrSNAPSHOTID')) {
                             $vmParams['SNAPSHOTID'] = $SCRIPTID;
                         }
@@ -249,8 +252,10 @@ class MainController extends VultrController {
                         //$vmParams['notify_activate'] = 'yes';
                     }
 
+                    logModuleCall('Vultr Provision', 'main.controller', 'vm Params', '1', $vmParams);
                     $vm = $this->vultrAPI->create($vmParams);
-       
+
+                    logModuleCall('Vultr Provision', 'main.controller', 'vm create result', '1', $vm);
                     if (is_array($vm)) {
                         $this->addVMCustomFields($vm['SUBID']);
                         SessionHelper::setFlashMessage('success', LangHelper::T('main.create.created_success'));
@@ -265,10 +270,14 @@ class MainController extends VultrController {
              * @author = Mateusz Pawłowski <mateusz.pa@moduelsgarden.com>
              */
             $regionList = VultrHelper::getAvailableRegion($this->vultrAPI->regions_list());
-            $snapshotsList = VultrHelper::getAllSnapshots($this->vultrAPI->snapshot_list(), $this->params['userid']);
-            
+//            $snapshotsList = VultrHelper::getAllSnapshots($this->vultrAPI->snapshot_list(), $this->params['userid']);
+            $snapshotsList = $this->vultrAPI->snapshot_list();
+
             $isosList = VultrHelper::getAvailableIsos($this->vultrAPI->iso_list());
-          
+//            logModuleCall('Vultr Provision', 'main.controller', 'params', '1', $this->params);
+//            logModuleCall('Vultr Provision', 'main.controller', 'snapshots', '1', $snapshotsList);
+//            logModuleCall('Vultr Provision', 'main.controller', 'regions', '1', $regionList);
+
             /*
              * End global snapshots
              */

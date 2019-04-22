@@ -44,7 +44,18 @@
                     </select>
                 </div>
             </div>
-                    
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">{$MGLANG->T('snapshots')}</label>
+                <div class="col-sm-10">
+                    <select name="snapshots[]" class="form-control" multiple>
+                        {foreach from=$snapshots item=snapshot}
+                            <option value="{$snapshot['SNAPSHOTID']}" selected>{$snapshot['description']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2">{$MGLANG->T('paymentType')}</label>
                 <div class="col-sm-10">

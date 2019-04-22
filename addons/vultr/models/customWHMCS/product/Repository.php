@@ -28,7 +28,7 @@ class Repository extends \MGModule\vultr\mgLibs\models\Repository {
     
     public function insertPricing($data) {
        // $insertResult = main\mgLibs\MySQL\Query::insert('tblpricing', $data);
-        DB::table('tblpricing')->insertGetId($data);
+        $insertResult = DB::table('tblpricing')->insertGetId($data);
         return $insertResult;
     }
     
