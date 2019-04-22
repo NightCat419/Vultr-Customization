@@ -117,32 +117,7 @@
                     <td>{$_LANG.main.index.hdd}</td>
                     <td>{$server.disk}</td>
                 </tr>
-                <tr>
-                    <td>{$_LANG.main.index.template}</td>
-                    <td>
-                        {if $isSnapshot}Snapshot
-                        {else}
-                            {$server.os}
-                        {/if}
-                        <a href="clientarea.php?action=productdetails&id={$serviceid}&cloudController=OSChange" class="btn btn-default" type="button">{if $server.os|truncate == 'Application '}{$_LANG.main.index.change_app}{else}{$_LANG.main.index.change_os}{/if}</a>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>{$_LANG.main.index.templateISO}</td>
-                    <td>{$isoName} 
-                        {if $availableIsos}
-                            <a href="clientarea.php?action=productdetails&id={$serviceid}&cloudController=ISOChange" class="btn btn-default" type="button">{$_LANG.main.index.change_iso}</a>
-                        {else}{$_LANG.isochange.index.no_available_isos}
-                        {/if}
-                        {if $isoName != ''}
-                            <form method="post" style="display: inline;">
-                                <button class="btn btn-default" name="detachIso" type="submit">{$_LANG.main.index.detach_iso}</button>
-                            </form>
-                        {/if}
-                    </td>
-                </tr>
-      
+
                 <tr>
                     <td>{$_LANG.main.index.ipaddress}</td>
                     <td>                        

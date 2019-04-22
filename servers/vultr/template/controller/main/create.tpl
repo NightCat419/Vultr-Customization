@@ -166,53 +166,6 @@
                         
                 <!--Select Startup script END-->
             {/if}
-            <!--IPv6-->
-            <div class="row">  
-                <div class="col-sm-5 col-sm-offset-1">
-                    <label for="vultrIPv6">{$_LANG.main.create.ipv6}</label>
-                    <select class="form-control" id="vultrIPv6" name="vultrIPv6">
-                        <option value="0"  {if isset($postData['vultrIPv6']) && $postData['vultrIPv6']=='0'}selected{/if}>{$_LANG.main.create.no}</option>                    
-                        <option value="1" {if isset($postData['vultrIPv6']) && $postData['vultrIPv6']=='1'}selected{/if}>{$_LANG.main.create.yes}</option>                        
-                    </select>
-                </div>
-                <!--IPv6 END-->
-                <!--Priv network-->
-                <div class="col-sm-5">
-                    <label for="vultrPrivNet">{$_LANG.main.create.priv_net}</label>
-                    <select class="form-control" id="vultrPrivNet" name="vultrPrivNet">
-                        <option value="0" {if isset($postData['vultrPrivNet']) && $postData['vultrPrivNet']=='0'}selected{/if}>{$_LANG.main.create.no}</option>
-                        <option value="1" {if isset($postData['vultrPrivNet']) && $postData['vultrPrivNet']=='1'}selected{/if}>{$_LANG.main.create.yes}</option>                    
-                    </select>
-                </div>
-            </div>
-            <!--Priv network END-->
-            <!--Select SSH-->
-            {if $module['configoptions']['os_type']!=='124' && $module['configoptions']['os_type']!=='186'}
-                <div class="row">
-                    <div class="col-sm-5 col-sm-offset-1">
-                        <label for="vultrSSH">{$_LANG.main.create.ssh_install}</label>
-                        {if count($sshkeys)>0}                        
-                            <select class="form-control" id="vultrSSH" name="vultrSSH">
-                                <option value="0" {if isset($postData['vultrSSH']) && $postData['vultrSSH']=='0'}selected{/if}>{$_LANG.main.create.no}</option>                    
-                                <option value="1" {if isset($postData['vultrSSH']) && $postData['vultrSSH']=='1'}selected{/if}>{$_LANG.main.create.yes}</option>                            
-                            </select>
-                        {else}
-                            <a class="btn btn-warning" href="clientarea.php?action=productdetails&id={$serviceid}&cloudController=SSHKeys" role="button">{$_LANG.main.create.no_ssh_found}</a>
-                        {/if}
-                    </div>
-                    {if count($sshkeys)>0}
-                        <div class="col-sm-5" id="vultrSCRIPTIDDIV">
-                            <label for="vultrSSHKEYID">{$_LANG.main.create.ssh_cert}</label>                    
-                            <select class="form-control" id="vultrSSHKEYID" name="vultrSSHKEYID">
-                                {foreach from=$sshkeys key=k item=v}
-                                    <option value="{$v['SSHKEYID']}" {if isset($postData['vultrSSHKEYID']) && $postData['vultrSSHKEYID']==$v['SSHKEYID']}selected{/if}>{$v['name']}</option>                        
-                                {/foreach}
-                            </select>
-                        </div>
-                    {/if}
-                </div>
-            {/if}
-            <!--Select SSH END-->
             <!--Auto backups-->
             <div class="row">  
                 <div class="col-sm-5 col-sm-offset-1">

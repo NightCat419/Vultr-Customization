@@ -220,7 +220,6 @@ class MainController extends VultrController {
                 }
                 if (!$error) {
                     if ($vmParams['OSID'] == '164') {
-                        logModuleCall('Vultr Provision', 'main.controller', 'SNAPSHOTID', '1', filter_input(INPUT_POST, 'vultrSNAPSHOTID'));
                         if ($SCRIPTID = filter_input(INPUT_POST, 'vultrSNAPSHOTID')) {
                             $vmParams['SNAPSHOTID'] = $SCRIPTID;
                         }
