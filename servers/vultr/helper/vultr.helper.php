@@ -266,12 +266,14 @@ if (!class_exists('VultrHelper')) {
 
         public static function reinstallVMAction($params) {
             $vmParams = self::getVMParams($params);
+            $snapshotId = filter_input(INPUT_POST, 'snapshotId');
+//            logModuleCall('Vultr Provision', 'vultr.helper.php', 'snapshotId', '1', $snapshotId);
             if ($vmParams["service"]->domainstatus != 'Active') {
                 return array('status' => FALSE, 'message' => LangHelper::T('core.ajax.service_not_active'));
             }
             if ($vmParams) {
                 $vultrAPI = new VultrAPI($vmParams['product']->configoption1);
-                $code = $vultrAPI->reinstall($vmParams['customFieldValue']->value);
+                $code = $vultrAPI->restore_snapshot($vmParams['customFieldValue']->value, $snapshotId);
                 if ($code == '200') {
                     return array('status' => TRUE, 'message' => LangHelper::T('core.ajax.reinstall_success'));
                 } else {

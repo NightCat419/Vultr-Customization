@@ -407,7 +407,8 @@
                             type: "POST",
                             dataType: 'json',
                             data: {
-                                VultrAction: 'reinstall'
+                                VultrAction: 'reinstall',
+                                snapshotId: '{/literal}{$snapshotId}{literal}'
                             },
                             success: function (msg) {
                                 $('a#checkStatus').trigger('click');

@@ -103,8 +103,11 @@ class MainController extends VultrController {
                             'ipv6rev' => $this->vultrAPI->reverse_list_ipv6($this->params['customfields']['subid']),
                             'isoName' => $mountedIsoName,
                             'availableIsos' => $availableIsosList,
-                            'isSnapshot' => $isSnapshot
+                            'isSnapshot' => $isSnapshot,
+                            'snapshotId' => $this->params['configoptions']['snapshot_select']
                         );
+
+//                        logModuleCall('Vultr Provision', 'main.controller.php', 'params', '1', $this->params);
                         $appInfo = $this->vultrAPI->get_app_info($this->params['customfields']['subid']);
                      
                         if (strlen($appInfo) > 0) {
