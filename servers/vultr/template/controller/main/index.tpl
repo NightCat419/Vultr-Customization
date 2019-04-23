@@ -128,30 +128,30 @@
                         {/if}                        
                     </td>
                 </tr>
-                <tr>
-                    <td>{$_LANG.main.index.root_password}</td>
-                    <td>
-                        {if $module.configoptions.os_type=='164'}
-                            {$_LANG.main.index.pass_undefined}
-                        {else}
-                            <button class="btn show_pass btn-default" id="btn_boot" onclick="$('.root_pass_show').removeClass('hide');
-                                    $('button.hide_pass').removeClass('hide');
-                                    $(this).addClass('hide');">
-                                {$_LANG.main.index.root_pass_show}
-                            </button>
-                            <span class="root_pass_show hide">
-                                {$server.default_password}                                
-                            </span>
-                            <br>
-                            <button class="btn hide_pass hide btn-default" id="btn_boot" onclick="$('.root_pass_show').addClass('hide');
-                                    $('button.show_pass').removeClass('hide');
-                                    $(this).addClass('hide');">
-                                {$_LANG.main.index.root_pass_hide}
-                            </button>
-                        {/if}
+                {*<tr>*}
+                    {*<td>{$_LANG.main.index.root_password}</td>*}
+                    {*<td>*}
+                        {*{if $module.configoptions.os_type=='164'}*}
+                            {*{$_LANG.main.index.pass_undefined}*}
+                        {*{else}*}
+                            {*<button class="btn show_pass btn-default" id="btn_boot" onclick="$('.root_pass_show').removeClass('hide');*}
+                                    {*$('button.hide_pass').removeClass('hide');*}
+                                    {*$(this).addClass('hide');">*}
+                                {*{$_LANG.main.index.root_pass_show}*}
+                            {*</button>*}
+                            {*<span class="root_pass_show hide">*}
+                                {*{$server.default_password}                                *}
+                            {*</span>*}
+                            {*<br>*}
+                            {*<button class="btn hide_pass hide btn-default" id="btn_boot" onclick="$('.root_pass_show').addClass('hide');*}
+                                    {*$('button.show_pass').removeClass('hide');*}
+                                    {*$(this).addClass('hide');">*}
+                                {*{$_LANG.main.index.root_pass_hide}*}
+                            {*</button>*}
+                        {*{/if}*}
 
-                    </td>                    
-                </tr>
+                    {*</td>                    *}
+                {*</tr>*}
             </table>  
         </div>
     </div> 

@@ -27,153 +27,153 @@
             </div>
             <!--Select Hostname END-->
             <!--Select Region-->
-            <div class="row">
-                <div class="col-sm-5 col-sm-offset-1">
-                    <label for="vultrRegionDCID">{$_LANG.main.create.location}</label>
-                    <select disabled class="form-control" id="vultrRegionDCID" name="vultrRegionDCID">
+            {*<div class="row">*}
+                {*<div class="col-sm-5 col-sm-offset-1">*}
+                    {*<label for="vultrRegionDCID">{$_LANG.main.create.location}</label>*}
+                    {*<select disabled class="form-control" id="vultrRegionDCID" name="vultrRegionDCID">*}
                         {*{foreach from=$regions key=k item=v}*}
-                            <option value="{$module['configoptions']['location']}" selected>{$regions[$module['configoptions']['location']]['name']} ({$regions[$module['configoptions']['location']]['country']})</option>
+                            {*<option value="{$module['configoptions']['location']}" selected>{$regions[$module['configoptions']['location']]['name']} ({$regions[$module['configoptions']['location']]['country']})</option>*}
                         {*{/foreach}*}
-                    </select>
-                </div>
-                <!--Select Region END-->
-                <!--Select OS-->
-                <div class="col-sm-5">
-                    <label for="vultrOSID">{$_LANG.main.create.system}</label>
-                    <select disabled class="form-control" id="vultrOSID" name="vultrOSID">          
-                        <option value="{$module['configoptions']['os_type']}" selected>{$oses[$module['configoptions']['os_type']]['name']}</option>                           
-                    </select>
-                </div>
-            </div>
+                    {*</select>*}
+                {*</div>*}
+                {*<!--Select Region END-->*}
+                {*<!--Select OS-->*}
+                {*<div class="col-sm-5">*}
+                    {*<label for="vultrOSID">{$_LANG.main.create.system}</label>*}
+                    {*<select disabled class="form-control" id="vultrOSID" name="vultrOSID">          *}
+                        {*<option value="{$module['configoptions']['os_type']}" selected>{$oses[$module['configoptions']['os_type']]['name']}</option>                           *}
+                    {*</select>*}
+                {*</div>*}
+            {*</div>*}
             <!--Select OS END-->
             <!--Select Snapshot-->
             <!--/***If selected OS Type is Snapshot***/-->
-            {if $module['configoptions']['os_type']==='164'}
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
-                        <label for="vultrSNAPSHOTID">{$_LANG.main.create.snapshot}</label>
-                        <select disabled class="form-control" id="vultrSNAPSHOTID" name="vultrSNAPSHOTID">
+            {*{if $module['configoptions']['os_type']==='164'}*}
+                {*<div class="row">*}
+                    {*<div class="col-sm-10 col-sm-offset-1">*}
+                        {*<label for="vultrSNAPSHOTID">{$_LANG.main.create.snapshot}</label>*}
+                        {*<select disabled class="form-control" id="vultrSNAPSHOTID" name="vultrSNAPSHOTID">*}
                             {*{foreach from=$snapshots key=k item=v}*}
-                                <option value="{$module['configoptions']['snapshot_select']}" selected>{$snapshots[$module['configoptions']['snapshot_select']]['description']}</option>
+                                {*<option value="{$module['configoptions']['snapshot_select']}" selected>{$snapshots[$module['configoptions']['snapshot_select']]['description']}</option>*}
                             {*{/foreach}*}
-                        </select>
-                    </div>
-                </div>
-            {/if}
+                        {*</select>*}
+                    {*</div>*}
+                {*</div>*}
+            {*{/if}*}
             <!--Select Snapshot END-->
             <!--/***If selected OS Type is Backup***/-->
-            {if $module['configoptions']['os_type']==='180'}
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
-                        <label for="vultrBACKUPID">{$_LANG.main.create.backups}</label>
-                        <select class="form-control" id="vultrBACKUPID" name="vultrBACKUPID">          
-                            {foreach from=$backups key=k item=v}
-                                <option value="{$v['BACKUPID']}" {if isset($postData['vultrBACKUPID']) && $postData['vultrBACKUPID']==$v['BACKUPID']}selected{/if}>{$v['description']} ({$v['date_created']} - {$v['size']})</option>
-                            {/foreach}
-                        </select>
-                    </div>
-                </div>
-            {/if}
+            {*{if $module['configoptions']['os_type']==='180'}*}
+                {*<div class="row">*}
+                    {*<div class="col-sm-10 col-sm-offset-1">*}
+                        {*<label for="vultrBACKUPID">{$_LANG.main.create.backups}</label>*}
+                        {*<select class="form-control" id="vultrBACKUPID" name="vultrBACKUPID">          *}
+                            {*{foreach from=$backups key=k item=v}*}
+                                {*<option value="{$v['BACKUPID']}" {if isset($postData['vultrBACKUPID']) && $postData['vultrBACKUPID']==$v['BACKUPID']}selected{/if}>{$v['description']} ({$v['date_created']} - {$v['size']})</option>*}
+                            {*{/foreach}*}
+                        {*</select>*}
+                    {*</div>*}
+                {*</div>*}
+            {*{/if}*}
             <!--Select Backup END-->
             <!--/***If selected OS Type is Application***/-->
-            {if $module['configoptions']['os_type']==='186'}
-                <div class="row">  
-                    <div class="col-sm-10 col-sm-offset-1">
-                        <label for="vultrAppID">{$_LANG.main.create.app}</label>
-                        <select disabled class="form-control" id="vultrAppID" name="vultrAppID">
-                            <option value="{$module['configoptions']['application']}" selected>{$apps[$module['configoptions']['application']]['deploy_name']}</option>       
-                        </select>
-                    </div>
-                </div>
-            {/if}        
+            {*{if $module['configoptions']['os_type']==='186'}*}
+                {*<div class="row">  *}
+                    {*<div class="col-sm-10 col-sm-offset-1">*}
+                        {*<label for="vultrAppID">{$_LANG.main.create.app}</label>*}
+                        {*<select disabled class="form-control" id="vultrAppID" name="vultrAppID">*}
+                            {*<option value="{$module['configoptions']['application']}" selected>{$apps[$module['configoptions']['application']]['deploy_name']}</option>       *}
+                        {*</select>*}
+                    {*</div>*}
+                {*</div>*}
+            {*{/if}        *}
             <!--/***If selected OS Type is Custom***/-->
-            {if $module['configoptions']['os_type']==='159'}
-                <div class="row col-sm-10 col-sm-offset-1">  
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label>
-                                <input type="radio" name="vultrISOType" id="cloudCustomType" value="ISO" {if (isset($postData['vultrISOType']) && $postData['vultrISOType']=='ISO') || !isset($postData['vultrSCRIPTtype'])}checked{/if}>
-                                {$_LANG.main.create.iso}
-                            </label>
-                        </div>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="vultrISOID" name="vultrISOID">
-                                {foreach from=$isos key=k item=v}
-                                    <option value="{$v['ISOID']}" {if isset($postData['vultrSCRIPTtype']) && $postData['vultrSCRIPTtype']==$v['ISOID']}selected{/if}>{$v['filename']}</option>
-                                {/foreach}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label>
-                                <input type="radio" name="vultrISOType" id="cloudCustomType" value="IPXECustom" {if isset($postData['vultrISOType']) && $postData['vultrISOType']=='IPXECustom'}checked{/if}>
-                                {$_LANG.main.create.ipxe_url}
-                            </label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input type="text" value="{if isset($postData['vultrIPXEUrl'])}{$postData['vultrIPXEUrl']}{/if}" class="form-control" id="vultrIPXEUrl" name="vultrIPXEUrl">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label>
-                                <input type="radio" name="vultrISOType" id="cloudCustomType" value="IPXEScript" {if isset($postData['vultrISOType']) && $postData['vultrISOType']=='IPXEScript'}checked{/if}>
-                                {$_LANG.main.create.ipxe} (<a href="{$WEB_ROOT}/clientarea.php?action=productdetails&id={$serviceid}&cloudController=Scripts">{$_LANG.main.create.manage}</a>)
-                            </label>
-                        </div>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="vultrSCRIPTID" name="vultrSCRIPTID">
-                                {foreach from=$startupscript key=k item=v}
-                                    {if $v['type']=='pxe'}
-                                        <option value="{$v['SCRIPTID']}" {if isset($postData['vultrSCRIPTID']) && $postData['vultrSCRIPTID']==$v['SCRIPTID']}selected{/if}>{$v['name']}</option>
-                                    {/if}
-                                {/foreach}
-                            </select>
-                        </div>
-                    </div>
-                </div>                
-            {/if}
+            {*{if $module['configoptions']['os_type']==='159'}*}
+                {*<div class="row col-sm-10 col-sm-offset-1">  *}
+                    {*<div class="row">*}
+                        {*<div class="col-sm-4">*}
+                            {*<label>*}
+                                {*<input type="radio" name="vultrISOType" id="cloudCustomType" value="ISO" {if (isset($postData['vultrISOType']) && $postData['vultrISOType']=='ISO') || !isset($postData['vultrSCRIPTtype'])}checked{/if}>*}
+                                {*{$_LANG.main.create.iso}*}
+                            {*</label>*}
+                        {*</div>*}
+                        {*<div class="col-sm-8">*}
+                            {*<select class="form-control" id="vultrISOID" name="vultrISOID">*}
+                                {*{foreach from=$isos key=k item=v}*}
+                                    {*<option value="{$v['ISOID']}" {if isset($postData['vultrSCRIPTtype']) && $postData['vultrSCRIPTtype']==$v['ISOID']}selected{/if}>{$v['filename']}</option>*}
+                                {*{/foreach}*}
+                            {*</select>*}
+                        {*</div>*}
+                    {*</div>*}
+                    {*<div class="row">*}
+                        {*<div class="col-sm-4">*}
+                            {*<label>*}
+                                {*<input type="radio" name="vultrISOType" id="cloudCustomType" value="IPXECustom" {if isset($postData['vultrISOType']) && $postData['vultrISOType']=='IPXECustom'}checked{/if}>*}
+                                {*{$_LANG.main.create.ipxe_url}*}
+                            {*</label>*}
+                        {*</div>*}
+                        {*<div class="col-sm-8">*}
+                            {*<input type="text" value="{if isset($postData['vultrIPXEUrl'])}{$postData['vultrIPXEUrl']}{/if}" class="form-control" id="vultrIPXEUrl" name="vultrIPXEUrl">*}
+                        {*</div>*}
+                    {*</div>*}
+                    {*<div class="row">*}
+                        {*<div class="col-sm-4">*}
+                            {*<label>*}
+                                {*<input type="radio" name="vultrISOType" id="cloudCustomType" value="IPXEScript" {if isset($postData['vultrISOType']) && $postData['vultrISOType']=='IPXEScript'}checked{/if}>*}
+                                {*{$_LANG.main.create.ipxe} (<a href="{$WEB_ROOT}/clientarea.php?action=productdetails&id={$serviceid}&cloudController=Scripts">{$_LANG.main.create.manage}</a>)*}
+                            {*</label>*}
+                        {*</div>*}
+                        {*<div class="col-sm-8">*}
+                            {*<select class="form-control" id="vultrSCRIPTID" name="vultrSCRIPTID">*}
+                                {*{foreach from=$startupscript key=k item=v}*}
+                                    {*{if $v['type']=='pxe'}*}
+                                        {*<option value="{$v['SCRIPTID']}" {if isset($postData['vultrSCRIPTID']) && $postData['vultrSCRIPTID']==$v['SCRIPTID']}selected{/if}>{$v['name']}</option>*}
+                                    {*{/if}*}
+                                {*{/foreach}*}
+                            {*</select>*}
+                        {*</div>*}
+                    {*</div>*}
+                {*</div>                *}
+            {*{/if}*}
             <!--Select Snapshot END-->
             <!--/***If selected OS Type is OS withput Windows***/-->
-            {if $module['configoptions']['os_type']!=='159' && $module['configoptions']['os_type']!=='164' && $module['configoptions']['os_type']!=='180' && $module['configoptions']['os_type']!=='186'}
+            {*{if $module['configoptions']['os_type']!=='159' && $module['configoptions']['os_type']!=='164' && $module['configoptions']['os_type']!=='180' && $module['configoptions']['os_type']!=='186'}*}
                 <!--Select Startup script-->
-                <div class="row">       
-                    <div class="col-sm-5 col-sm-offset-1">
-                        <label for="vultrSCRIPT">{$_LANG.main.create.script_install}</label>
-                        {if count($startupscript)>0}
-                        <select class="form-control" id="vultrSCRIPT" name="vultrSCRIPT">
-                            <option value="0"  {if isset($postData['vultrSCRIPT']) && $postData['vultrSCRIPT']=='0'}selected{/if}selected>{$_LANG.main.create.no}</option>                    
-                            <option value="1" {if isset($postData['vultrSCRIPT']) && $postData['vultrSCRIPT']=='1'}selected{/if}>{$_LANG.main.create.yes}</option>
-                        </select>
-                        {else}
-                            <a class="btn btn-warning" href="clientarea.php?action=productdetails&id={$serviceid}&cloudController=Scripts" role="button">{$_LANG.main.create.no_script_found}</a>
-                        {/if}
-                    </div>
-                    {if count($startupscript)>0}
-                        <div class="col-sm-5" id="selectStartupScriptDiv">
-                            <label for="vultrSCRIPTID">{$_LANG.main.create.script}</label>                    
-                            <select class="form-control" id="vultrSCRIPTID" name="vultrSCRIPTID">
-                                {foreach from=$startupscript key=k item=v}
-                                    {if !isset($v['type']) || $v['type']=='boot'}
-                                        <option value="{$v['SCRIPTID']}" {if isset($postData['vultrSCRIPTtype']) && $postData['vultrSCRIPTtype']==$v['SCRIPTID']}selected{/if}>{$v['name']}</option>
-                                    {/if}
-                                {/foreach}
-                            </select>
-                        </div>
-                    {/if}
-                </div>
+                {*<div class="row">       *}
+                    {*<div class="col-sm-5 col-sm-offset-1">*}
+                        {*<label for="vultrSCRIPT">{$_LANG.main.create.script_install}</label>*}
+                        {*{if count($startupscript)>0}*}
+                        {*<select class="form-control" id="vultrSCRIPT" name="vultrSCRIPT">*}
+                            {*<option value="0"  {if isset($postData['vultrSCRIPT']) && $postData['vultrSCRIPT']=='0'}selected{/if}selected>{$_LANG.main.create.no}</option>                    *}
+                            {*<option value="1" {if isset($postData['vultrSCRIPT']) && $postData['vultrSCRIPT']=='1'}selected{/if}>{$_LANG.main.create.yes}</option>*}
+                        {*</select>*}
+                        {*{else}*}
+                            {*<a class="btn btn-warning" href="clientarea.php?action=productdetails&id={$serviceid}&cloudController=Scripts" role="button">{$_LANG.main.create.no_script_found}</a>*}
+                        {*{/if}*}
+                    {*</div>*}
+                    {*{if count($startupscript)>0}*}
+                        {*<div class="col-sm-5" id="selectStartupScriptDiv">*}
+                            {*<label for="vultrSCRIPTID">{$_LANG.main.create.script}</label>                    *}
+                            {*<select class="form-control" id="vultrSCRIPTID" name="vultrSCRIPTID">*}
+                                {*{foreach from=$startupscript key=k item=v}*}
+                                    {*{if !isset($v['type']) || $v['type']=='boot'}*}
+                                        {*<option value="{$v['SCRIPTID']}" {if isset($postData['vultrSCRIPTtype']) && $postData['vultrSCRIPTtype']==$v['SCRIPTID']}selected{/if}>{$v['name']}</option>*}
+                                    {*{/if}*}
+                                {*{/foreach}*}
+                            {*</select>*}
+                        {*</div>*}
+                    {*{/if}*}
+                {*</div>*}
                         
                 <!--Select Startup script END-->
-            {/if}
+            {*{/if}*}
             <!--Auto backups-->
-            <div class="row">  
-                <div class="col-sm-5 col-sm-offset-1">
-                    <label for="vultrAutoBackups">{$_LANG.main.create.backups}</label>
-                    <select disabled class="form-control" id="vultrAutoBackups" name="vultrAutoBackups">
-                        <option value="{$module['configoptions']['auto_backups']}" selected>{if $module['configoptions']['auto_backups']}{$_LANG.main.create.yes}{else}{$_LANG.main.create.no}{/if}</option>       
-                    </select>
-                </div>
+            {*<div class="row">  *}
+                {*<div class="col-sm-5 col-sm-offset-1">*}
+                    {*<label for="vultrAutoBackups">{$_LANG.main.create.backups}</label>*}
+                    {*<select disabled class="form-control" id="vultrAutoBackups" name="vultrAutoBackups">*}
+                        {*<option value="{$module['configoptions']['auto_backups']}" selected>{if $module['configoptions']['auto_backups']}{$_LANG.main.create.yes}{else}{$_LANG.main.create.no}{/if}</option>       *}
+                    {*</select>*}
+                {*</div>*}
                 <!--Auto backups END-->
                 <!--Notify-->              
                 <!--<div class="col-sm-5">
@@ -183,7 +183,7 @@
                         <option value="1" {if isset($postData['vultrNotify']) && $postData['vultrNotify']=='1'}selected{/if}>{$_LANG.main.create.yes}</option>                        
                     </select>
                 </div>-->
-            </div>
+            {*</div>*}
             <!--Notify END-->
             <!--Submit-->     
             <div class="row">
